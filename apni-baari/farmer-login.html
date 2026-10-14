@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="किसान सूचना एवं सेवा पोर्टल - Farmer Login - SIH prototype">
+<title>किसान लॉगिन | किसान सूचना एवं सेवा पोर्टल</title>
+<style>
+  :root {
+    --black-strip: #0a0a0a;
+    --rust: #b8451f;
+    --rust-dark: #93391a;
+    --lavender: #e6dff5;
+    --lavender-border: #cabcea;
+    --border-warm: #d8d1c3;
+    --bg-cream: #faf8f3;
+    --text-dark: #1c1c1c;
+    --text-muted: #5a544b;
+    --panel-bg: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    background-color: var(--bg-cream);
+    color: var(--text-dark);
+    font-size: 14px;
+  }
+
+  a { color: var(--rust); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ---------- Utility bar ---------- */
+  .utility {
+    background-color: var(--black-strip);
+    color: #ffffff;
+  }
+  .utility-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px 0;
+    font-size: 12.5px;
+  }
+  .utility-inner div:first-child { color: #ffffff; }
+  .utility-right { display: flex; align-items: center; gap: 14px; }
+  .utility-right a { color: #ffffff; }
+  .utility-right a:hover { color: var(--rust); text-decoration: none; }
+
+  /* ---------- Branding ---------- */
+  .branding { background-color: #ffffff; border-bottom: 1px solid var(--border-warm); }
+  .branding-inner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 0;
+    flex-wrap: wrap;
+  }
+  .logo-mark {
+    width: 62px;
+    height: 62px;
+    flex-shrink: 0;
+    border: 2px solid var(--rust);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+  }
+  .logo-mark .hi { font-size: 13px; font-weight: 700; color: var(--rust); }
+  .logo-mark .en { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--text-muted); }
+  .brand-divider {
+    width: 1px;
+    align-self: stretch;
+    background-color: var(--border-warm);
+  }
+  .brand-copy { flex: 1; min-width: 220px; }
+  .brand-copy { position: relative; }
+  .brand-copy .ministry-wrap { position: relative; display: inline-block; padding: 4px 8px 4px 0; min-height: 42px; }
+  .brand-copy .ministry-wrap .emblem-watermark { position: absolute; left: -8px; top: -45px; width: 125px; height: 105px; opacity: .10; pointer-events: none; z-index: 0; }
+  .brand-copy .ministry-wrap .ministry-text { position: relative; z-index: 1; }
+  .logo { width: auto; height: 72px; max-width: 280px; object-fit: contain; display: block; }
+  .footer-logo { height: 50px; width: auto; max-width: 190px; object-fit: contain; display: block; }
+
+  .brand-copy .tagline {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--rust);
+    margin-bottom: 4px;
+  }
+  .brand-copy .department {
+    font-size: 13px;
+    color: var(--text-dark);
+    line-height: 1.5;
+  }
+  .brand-copy .department span { color: var(--text-muted); }
+
+  .search-box {
+    display: flex;
+    border: 1px solid var(--border-warm);
+    background-color: #ffffff;
+    margin: 0;
+  }
+  .search-box input {
+    border: none;
+    padding: 9px 12px;
+    font-size: 13px;
+    width: 220px;
+    outline: none;
+  }
+  .search-box button {
+    background-color: var(--rust);
+    border: none;
+    color: #fff;
+    width: 38px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .search-box button:hover { background-color: var(--rust-dark); }
+
+  /* ---------- Nav bar ---------- */
+  .navbar { background-color: var(--lavender); border-bottom: 1px solid var(--lavender-border); }
+  .nav-inner { display: flex; align-items: center; }
+  .nav-links { display: flex; flex-wrap: wrap; }
+  .nav-links a {
+    display: block;
+    color: var(--text-dark);
+    padding: 13px 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+  }
+  .nav-links a:hover { background-color: rgba(184, 69, 31, 0.08); text-decoration: none; }
+  .nav-links a.active { border-bottom: 3px solid var(--rust); color: var(--rust); }
+  .menu-toggle { display: none; background: none; border: none; font-size: 20px; padding: 10px 20px; cursor: pointer; }
+
+  /* ---------- Notice bar ---------- */
+  .notice-bar {
+    background-color: #fdf1e8;
+    border-bottom: 1px solid #eecdaa;
+    color: #7a4415;
+    font-size: 12.5px;
+    text-align: center;
+    padding: 7px 10px;
+  }
+
+  /* ---------- Main layout ---------- */
+  main { padding: 30px 0 10px; }
+
+  .login-wrapper { display: flex; justify-content: center; }
+
+  .login-panel {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-warm);
+    width: 100%;
+    max-width: 430px;
+  }
+  .login-panel-header {
+    background-color: var(--rust);
+    color: #fff;
+    padding: 15px 20px;
+    text-align: center;
+  }
+  .login-panel-header h1 { font-size: 19px; margin: 0; font-weight: 700; }
+  .login-panel-header p { margin: 4px 0 0; font-size: 12.5px; color: #ffe4d5; }
+
+  .login-panel-body { padding: 22px 24px 20px; }
+
+  .form-group { margin-bottom: 15px; }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+  }
+  .form-group input[type="text"],
+  .form-group input[type="password"],
+  .form-group select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border-warm);
+    background-color: #fdfcfa;
+    font-size: 13.5px;
+    color: var(--text-dark);
+  }
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: 2px solid var(--rust);
+    outline-offset: 1px;
+    border-color: var(--rust);
+  }
+
+  .captcha-box { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+  .captcha-display {
+    background-color: var(--lavender);
+    border: 1px dashed var(--lavender-border);
+    font-family: "Courier New", monospace;
+    font-size: 17px;
+    letter-spacing: 4px;
+    padding: 7px 16px;
+    color: #33404d;
+    user-select: none;
+  }
+  .captcha-box input { flex: 1; padding: 8px 10px; border: 1px solid var(--border-warm); font-size: 13.5px; }
+
+  .remember-row { display: flex; align-items: center; gap: 6px; margin-bottom: 16px; font-size: 13px; }
+
+  .btn-login {
+    width: 100%;
+    background-color: var(--rust);
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    font-size: 14.5px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+  }
+  .btn-login:hover { background-color: var(--rust-dark); }
+
+  .link-row { display: flex; justify-content: space-between; margin-top: 12px; font-size: 12.5px; }
+  .divider { border: none; border-top: 1px solid var(--border-warm); margin: 16px 0; }
+  .register-row { text-align: center; font-size: 13px; }
+
+  /* ---------- Info section ---------- */
+  .info-section {
+    max-width: 430px;
+    margin: 18px auto 0;
+    border: 1px solid var(--border-warm);
+    background-color: #fbf9f5;
+  }
+  .info-section h2 {
+    background-color: var(--lavender);
+    font-size: 13.5px;
+    margin: 0;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--lavender-border);
+    color: var(--rust-dark);
+  }
+  .info-section ul { margin: 0; padding: 10px 26px; font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ---------- Footer ---------- */
+  .footer { background-color: var(--black-strip); color: #cfc9c1; margin-top: 36px; }
+  .footer-top { padding: 24px 0 10px; }
+  .footer-brand { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
+  .footer-brand .logo-mark { border-color: #cfc9c1; }
+  .footer-brand .logo-mark .hi { color: #ffffff; }
+  .footer-brand .logo-mark .en { color: #a39d94; }
+  .footer-brand strong { color: #ffffff; font-size: 14px; }
+  .footer-brand span { color: #a39d94; font-size: 12px; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .footer-col h3 { font-size: 13px; color: #ffffff; margin: 0 0 10px; }
+  .footer-col a { display: block; color: #cfc9c1; font-size: 12.5px; margin-bottom: 8px; }
+  .footer-col a:hover { color: var(--rust); text-decoration: none; }
+  .footer-bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 0;
+    font-size: 11.5px;
+    color: #7d786f;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 800px) {
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .branding-inner { flex-direction: column; align-items: flex-start; }
+    .search-box { width: 100%; }
+    .search-box input { flex: 1; width: auto; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { flex-direction: column; width: 100%; }
+    .nav-links a { border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .nav-links a.active { border-left: 3px solid var(--rust); border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .utility-inner { flex-direction: column; align-items: flex-start; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .login-panel, .info-section { max-width: 100%; }
+  }
+</style>
+
+<style id="nav-login-style">
+.nav-links{flex:1;}
+.nav-login{margin-left:auto;padding-left:24px;padding-right:20px;font-weight:600;}
+.nav-links a.btn-outline.nav-register{
+  border:1px solid #f2a61a !important;
+  color:#f2a61a !important;
+  background:#fff !important;
+  padding:9px 22px !important;
+  height:auto !important;
+  border-radius:3px !important;
+  font-weight:700 !important;
+  display:flex !important;
+  align-items:center !important;
+  line-height:normal !important;
+}
+.nav-links a.btn-outline.nav-register:hover{
+  background:#fff !important;
+  color:#f2a61a !important;
+  border-bottom:1px solid #f2a61a !important;
+  text-decoration:none !important;
+}
+@media(max-width:700px){.nav-links a.btn-outline.nav-register{padding:9px 18px !important;height:auto !important;}}
+
+@media(max-width:700px){.nav-login{margin-left:0;}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/whatsapp-bot.css">
+</head>
+<body>
+
+<header>
+  <div class="utility">
+    <div class="container utility-inner">
+      <div><strong>भारत सरकार</strong> | Government of India</div>
+      <div class="utility-right">
+        <a href="#">स्क्रीन रीडर</a>
+        <a href="#">A-</a><a href="#">A</a><a href="#">A+</a>
+        <a href="#">हिंदी / English</a>
+      </div>
+    </div>
+  </div>
+  <div class="branding">
+    <div class="container branding-inner">
+      <a href="index.html">
+        <img class="logo" src="assets/logo.png" alt="अपनी बारी लोगो">
+      </a>
+      <div class="brand-divider"></div>
+      <div class="brand-copy">
+        <div class="tagline">हर किसान की बारी, सही समय की जानकारी</div>
+        <div class="department">किसान सूचना एवं सेवा पोर्टल</div>
+        <div class="department"><span class="ministry-text">Ministry of Consumer Affairs, Food and Public Distribution</span></div>
+      </div>
+      <form class="search-box" action="#" method="get">
+        <input type="search" placeholder="Search Services" aria-label="Search Services">
+        <button type="submit" aria-label="Search">&#8981;</button>
+      </form>
+    </div>
+  </div>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+      <div class="nav-links">
+        <a href="index.html">होम</a>
+        <a href="about.html">हमारे बारे में</a>
+        <a href="services.html">सेवाएँ</a>
+        <a href="dashboard.html">डैशबोर्ड</a>
+        <a href="reports.html">रिपोर्ट</a>
+        <a href="contact.html">संपर्क करें</a>
+<a href="login.html" class="nav-login">Login</a><a href="registration.html" class="btn-outline nav-register">Register</a>
+      </div>
+    </div>
+</nav>
+<div class="price-ticker" id="latest-price-bar" role="region" aria-label="Latest MSP prices"><div class="price-ticker-track"><span class="price-label">LATEST MSP / नवीनतम MSP</span><strong>🌾 गेहूँ ₹2,425 / क्विंटल</strong><strong>🌾 धान ₹2,320 / क्विंटल</strong><strong>🌾 सरसों ₹5,950 / क्विंटल</strong><strong>🌾 चना ₹5,650 / क्विंटल</strong><strong>अपनी BAARI • किसान मूल्य सूचना</strong><span class="price-label">LATEST MSP / नवीनतम MSP</span><strong>🌾 गेहूँ ₹2,425 / क्विंटल</strong><strong>🌾 धान ₹2,320 / क्विंटल</strong><strong>🌾 सरसों ₹5,950 / क्विंटल</strong><strong>🌾 चना ₹5,650 / क्विंटल</strong></div></div>
+
+</header>
+
+<div class="notice-bar">
+  किसान सूचना एवं सेवा पोर्टल कभी भी फ़ोन कॉल पर आपका OTP नहीं माँगता। OTP केवल आपके पंजीकृत मोबाइल नंबर पर भेजा जाता है।
+</div>
+
+<main>
+  <div class="container">
+    <div class="login-wrapper">
+      <div>
+        <div class="login-panel">
+          <div class="login-panel-header">
+            <h1>किसान लॉगिन (Farmer Login)</h1>
+            <p>किसान सेवाओं तक पहुँचने के लिए लॉगिन करें</p>
+          </div>
+          <div class="login-panel-body">
+            <form action="dashboard.html" method="get" onsubmit="return farmerDemoLogin(event);">
+              <div class="form-group">
+                  <label for="login-method">लॉगिन का तरीका (Login Method)</label>
+                  <select id="login-method" name="login-method" onchange="toggleFarmerLogin()">
+                    <option value="aadhaar">आधार कार्ड (Aadhaar Card)</option>
+                    <option value="mobile">मोबाइल नंबर (Mobile Number)</option>
+                    <option value="farmer-id">किसान ID (Farmer ID)</option>
+                  </select>
+                </div>
+
+                <div class="form-group" id="farmer-id-group">
+                  <label for="farmer-id">आधार नंबर (Aadhaar Number)</label>
+                  <input type="text" id="farmer-id" name="farmer-id" maxlength="12"
+                         placeholder="Enter 12-digit Aadhaar Number">
+                  <small id="farmer-id-help" style="display:block;margin-top:5px;color:var(--text-muted);font-size:11.5px;">
+                    OTP आपके पंजीकृत मोबाइल नंबर पर भेजा जाएगा।
+                  </small>
+                </div>
+
+                <div class="form-group">
+                  <label for="otp">OTP (One-Time Password)</label>
+                  <div style="display:flex;gap:8px;">
+                    <input type="text" id="otp" name="otp" maxlength="6"
+                           placeholder="Enter 6-digit OTP" style="flex:1;">
+                    <button type="button" id="send-otp"
+                            style="white-space:nowrap;padding:8px 12px;border:1px solid var(--rust);background:#fff;color:var(--rust);font-weight:600;cursor:pointer;">
+                      OTP भेजें
+                    </button>
+                  </div>
+                  <small style="display:block;margin-top:5px;color:var(--text-muted);font-size:11.5px;">
+                    Demo prototype: OTP authentication is simulated.
+                  </small>
+                </div>
+
+              <div class="form-group">
+                <label for="captcha">नीचे दिखाया गया कोड दर्ज करें</label>
+                <div class="captcha-box">
+                  <div class="captcha-display">4K7 9X</div>
+                  <input type="text" id="captcha" name="captcha" placeholder="Enter code">
+                </div>
+              </div>
+
+              <button type="submit" class="btn-login">OTP सत्यापित करें और लॉगिन करें</button>
+
+              <div class="link-row">
+                <a href="#">पासवर्ड भूल गए?</a>
+                <a href="contact.html">सहायता चाहिए?</a>
+              </div>
+
+              <hr class="divider">
+
+              <div class="register-row">
+                नए किसान हैं? <a href="#">यहाँ पंजीकरण करें</a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h2>महत्वपूर्ण सूचना</h2>
+          <ul>
+            <li>अपना आधार नंबर, किसान ID और OTP किसी के साथ साझा न करें।</li>
+            <li>यह पोर्टल अद्यतन वेब ब्राउज़र पर सर्वश्रेष्ठ प्रदर्शित होता है।</li>
+            <li>सहायता हेतु अपने नज़दीकी सहायता केंद्र से संपर्क करें।</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-brand">
+        <img class="footer-logo" src="assets/logo.png" alt="अपनी बारी लोगो">
+        <div>
+          <strong>किसान सूचना एवं सेवा पोर्टल</strong><br>
+          <span>हर किसान की बारी, सही समय की जानकारी</span><br>
+          <span>Ministry of Consumer Affairs, Food and Public Distribution</span>
+        </div>
+      </div>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>पोर्टल के बारे में</h3>
+          <a href="about.html">विजन और उद्देश्य</a>
+          <a href="about.html">हमारे बारे में</a>
+          <a href="reports.html">वार्षिक रिपोर्ट</a>
+          <a href="contact.html">संपर्क विवरण</a>
+        </div>
+        <div class="footer-col">
+          <h3>किसान सेवाएँ</h3>
+          <a href="services.html">योजनाएँ और लाभ</a>
+          <a href="services.html">बाजार जानकारी</a>
+          <a href="services.html">मौसम सूचना</a>
+          <a href="dashboard.html">आवेदन स्थिति</a>
+        </div>
+        <div class="footer-col">
+          <h3>दस्तावेज़</h3>
+          <a href="reports.html">मार्गदर्शिका</a>
+          <a href="reports.html">रिपोर्ट</a>
+          <a href="reports.html">सूचनाएँ</a>
+          <a href="#">वेबसाइट नीतियाँ</a>
+        </div>
+        <div class="footer-col">
+          <h3>त्वरित लिंक</h3>
+          <a href="services.html">सभी सेवाएँ</a>
+          <a href="govt-official-login.html">अधिकारी लॉगिन</a>
+          <a href="contact.html">सहायता</a>
+          <a href="#">साइटमैप</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <div>&copy; किसान सूचना एवं सेवा पोर्टल. सर्वाधिकार सुरक्षित.</div>
+      <div>Accessibility &nbsp; | &nbsp; Privacy &nbsp; | &nbsp; Terms</div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- OTP REDIRECT PATCH START -->
+<script>
+(function () {
+  document.addEventListener('click', function (event) {
+    const btn = event.target.closest('button, input[type="submit"], a');
+    if (!btn) return;
+
+    const label = (btn.innerText || btn.value || btn.getAttribute('aria-label') || '').trim().toLowerCase();
+    const form = btn.closest('form');
+
+    if (/(verify|otp|submit)/i.test(label) || (form && /otp/i.test(form.innerText || form.textContent || ''))) {
+      setTimeout(function () {
+        const bodyText = (document.body.innerText || '').toLowerCase();
+        const success = /otp verified|verification successful|verified successfully|login successful|successfully verified|otp is valid/.test(bodyText);
+        if (success) {
+          window.location.href = 'dashboard.html';
+        }
+      }, 100);
+    }
+  });
+})();
+</script>
+<!-- OTP REDIRECT PATCH END -->
+
+<script src="js/whatsapp-bot.js"></script>
+
+<button class="wa-fab" id="waFab" aria-label="Open Apni BAARI WhatsApp Help" aria-expanded="false" title="अपनी BAARI WhatsApp Help"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 3C8.82 3 3 8.62 3 15.55c0 2.48.75 4.78 2.04 6.7L3.25 29l6.98-1.77A13.22 13.22 0 0 0 16 28.1c7.18 0 13-5.62 13-12.55S23.18 3 16 3Zm0 22.85c-2.1 0-4.04-.62-5.68-1.69l-.4-.26-4.14 1.05 1.1-3.94-.28-.42a10.2 10.2 0 0 1-1.61-5.04C4.99 10.02 9.93 5.3 16 5.3s11.01 4.72 11.01 10.25S22.07 25.85 16 25.85Zm6.36-7.72c-.34-.17-2-1-2.31-1.11-.31-.11-.54-.17-.77.17-.23.34-.88 1.11-1.08 1.34-.2.23-.4.26-.74.09-.34-.17-1.43-.51-2.72-1.62-1.01-.87-1.69-1.94-1.89-2.28-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.09-.17-.77-1.85-1.06-2.54-.28-.67-.56-.58-.77-.59h-.66c-.23 0-.6.09-.91.43-.31.34-1.2 1.17-1.2 2.85s1.23 3.31 1.4 3.54c.17.23 2.41 3.68 5.85 5.16.82.35 1.46.56 1.96.71.82.25 1.56.21 2.15.13.66-.1 2-.82 2.28-1.62.28-.8.28-1.48.2-1.62-.08-.14-.31-.23-.65-.4Z"/></svg></button>
+<div class="wa-window" id="waWindow" role="dialog" aria-label="अपनी BAARI WhatsApp Help">
+  <div class="wa-head"><div class="wa-head-icon"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 3C8.82 3 3 8.62 3 15.55c0 2.48.75 4.78 2.04 6.7L3.25 29l6.98-1.77A13.22 13.22 0 0 0 16 28.1c7.18 0 13-5.62 13-12.55S23.18 3 16 3Zm0 22.85c-2.1 0-4.04-.62-5.68-1.69l-.4-.26-4.14 1.05 1.1-3.94-.28-.42a10.2 10.2 0 0 1-1.61-5.04C4.99 10.02 9.93 5.3 16 5.3s11.01 4.72 11.01 10.25S22.07 25.85 16 25.85Zm6.36-7.72c-.34-.17-2-1-2.31-1.11-.31-.11-.54-.17-.77.17-.23.34-.88 1.11-1.08 1.34-.2.23-.4.26-.74.09-.34-.17-1.43-.51-2.72-1.62-1.01-.87-1.69-1.94-1.89-2.28-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.09-.17-.77-1.85-1.06-2.54-.28-.67-.56-.58-.77-.59h-.66c-.23 0-.6.09-.91.43-.31.34-1.2 1.17-1.2 2.85s1.23 3.31 1.4 3.54c.17.23 2.41 3.68 5.85 5.16.82.35 1.46.56 1.96.71.82.25 1.56.21 2.15.13.66-.1 2-.82 2.28-1.62.28-.8.28-1.48.2-1.62-.08-.14-.31-.23-.65-.4Z"/></svg></div><div class="wa-head-title">अपनी BAARI Help Bot<div class="wa-sub">WhatsApp-style • Click an option, no typing required</div></div><button class="wa-close" id="waClose" aria-label="Close">×</button></div>
+  <div class="wa-body" id="waBody"><div class="wa-bubble bot">नमस्ते! 👋 अपनी BAARI में आपका स्वागत है। नीचे कोई भी विकल्प चुनें — आपको कुछ टाइप करने की जरूरत नहीं है।</div></div>
+  <div class="wa-options"><button class="wa-option" onclick="chooseWhatsApp('status')">🎫 टोकन स्थिति</button><button class="wa-option" onclick="chooseWhatsApp('booking')">📅 टोकन बुक करें</button><button class="wa-option" onclick="chooseWhatsApp('msp')">💰 आज की MSP</button><button class="wa-option" onclick="chooseWhatsApp('weather')">🌧️ मौसम अलर्ट</button><button class="wa-option" onclick="chooseWhatsApp('payment')">🏦 भुगतान स्थिति</button><button class="wa-help" id="waHelp">❓ मदद / Help</button></div>
+</div>
+</body>
+</html>
+
+<script>
+function toggleFarmerLogin() {
+  const method = document.getElementById('login-method').value;
+  const label = document.querySelector('#farmer-id-group label');
+  const input = document.getElementById('farmer-id');
+  const help = document.getElementById('farmer-id-help');
+
+  if (method === 'aadhaar') {
+    label.textContent = 'आधार नंबर (Aadhaar Number)';
+    input.placeholder = 'Enter 12-digit Aadhaar Number';
+    input.maxLength = 12;
+    help.textContent = 'OTP आपके पंजीकृत मोबाइल नंबर पर भेजा जाएगा।';
+  } else if (method === 'mobile') {
+    label.textContent = 'मोबाइल नंबर (Mobile Number)';
+    input.placeholder = 'Enter Registered Mobile Number';
+    input.maxLength = 10;
+    help.textContent = 'पंजीकृत मोबाइल नंबर पर OTP भेजा जाएगा।';
+  } else {
+    label.textContent = 'किसान ID (Farmer ID)';
+    input.placeholder = 'Enter Farmer ID';
+    input.maxLength = 20;
+    help.textContent = 'किसान ID से जुड़े मोबाइल नंबर पर OTP भेजा जाएगा।';
+  }
+}
+
+document.getElementById('send-otp')?.addEventListener('click', function() {
+  this.textContent = 'OTP भेजा गया ✓';
+  this.disabled = true;
+  setTimeout(() => {
+    this.textContent = 'OTP फिर भेजें';
+    this.disabled = false;
+  }, 30000);
+});
+
+function farmerDemoLogin(event) {
+  event.preventDefault();
+  const otp = document.getElementById('otp').value.trim();
+  if (otp.length !== 6) {
+    alert('कृपया 6 अंकों का OTP दर्ज करें।');
+    return false;
+  }
+  window.location.href = 'dashboard.html';
+  return false;
+}
+
+toggleFarmerLogin();
+</script>

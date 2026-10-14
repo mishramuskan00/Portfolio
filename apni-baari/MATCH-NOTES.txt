@@ -1,0 +1,1 @@
+Header, logo placement, navigation geometry, content width and typography were matched to the registration page. The exact registration logo asset is used in the main portal.

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>किसान पंजीकरण | अपनी BAARI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#17163f;--orange:#c44720;--green:#087f45;--bg:#f7f7fb;--border:#d9dbe7;--text:#182044;--muted:#666b7c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Noto Sans Devanagari",Inter,sans-serif;color:var(--text);background:#fff}
+button,input,select,textarea{font:inherit}
+.topbar{height:40px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;font-size:14px}
+.toplinks{display:flex;gap:18px;align-items:center}
+.header{background:#fff;display:flex;align-items:center;gap:28px;padding:16px 5%;border-bottom:1px solid #eee}
+.logo{width:220px;height:90px;object-fit:contain;object-position:left center}
+.brand{border-left:1px solid #cfd1dc;padding-left:28px;flex:1}.brand h1{margin:0;color:var(--orange);font-size:26px;font-weight:800}.brand h2{margin:4px 0 0;font-size:19px}.brand p{margin:2px 0 0;font-family:Inter,sans-serif;font-size:15px}
+.search{width:300px;height:45px;border:1px solid #cdd0df;border-radius:8px;display:flex;align-items:center;padding:0 14px;color:#777}.search input{border:0;outline:0;width:100%}
+.nav{position:sticky;top:0;z-index:50;height:60px;background:#f0effb;display:flex;align-items:center;padding:0 5%;gap:34px;box-shadow:0 2px 7px #0000000b}.nav a{color:var(--navy);text-decoration:none;font-weight:700}.nav .spacer{flex:1}
+.btn-outline{border:1px solid var(--orange);color:var(--orange);background:#fff;padding:9px 22px;border-radius:3px;font-weight:700}
+.notice{background:#fff5e9;border-bottom:1px solid #efd8bb;text-align:center;padding:9px;color:#65564b;font-size:14px}
+.container{max-width:1400px;margin:auto;padding:28px 4% 50px}.title-row{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}.title-row h1{font-size:31px;margin:0 0 4px}.title-row p{margin:0;color:var(--muted)}.required{color:#c32c1d;font-size:13px}
+.form-section{scroll-margin-top:78px;margin-top:24px;border:1px solid var(--border);border-radius:10px;padding:24px;background:#fff;box-shadow:0 3px 12px #16163f0a}
+.form-section:first-of-type{margin-top:22px}.form-section h2{margin:0 0 5px;font-size:22px}.sub{margin:0 0 20px;color:var(--muted)}
+.section-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}
+label{font-weight:600;font-size:14px}.req{color:#d33}
+input,select,textarea{border:1px solid #cfd2dd;border-radius:6px;padding:12px 13px;background:#fff;outline:none;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px #087f4514}
+.help{font-size:12px;color:#777}.info{padding:13px;background:#f4f7ff;border-left:4px solid #3f73c8;border-radius:4px;margin:16px 0}
+.choice-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.choice{border:1px solid var(--border);border-radius:10px;padding:18px;cursor:pointer;min-height:145px;background:#fff}.choice.selected{border:2px solid var(--green);background:#f2fbf6}.choice input{display:none}.choice .icon{font-size:32px}.choice h3{margin:8px 0 5px;font-size:17px}.choice p{margin:0;color:#666;font-size:13px}
+.dynamic{margin-top:18px;padding:15px;background:#fff9ef;border:1px solid #f0d6a5;border-radius:8px}
+.upload-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.upload{border:1px dashed #bfc3d0;padding:16px;border-radius:8px;background:#fafbfe}.upload small{display:block;color:#777;margin-top:6px}
+.doc-title{font-weight:800;margin-bottom:5px}.doc-badge{display:inline-block;font-size:11px;padding:3px 7px;border-radius:10px;background:#fde9e5;color:#9d2b1b;margin-left:5px}.doc-badge.optional{background:#edf2ff;color:#345b9b}
+.review{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.review-item{padding:12px;background:#f8f8fb;border-radius:6px}.review-item b{display:block;font-size:12px;color:#777;margin-bottom:3px}
+.checkbox{display:flex;gap:9px;align-items:flex-start;margin-top:18px}.checkbox input{width:auto;margin-top:4px}
+.actions{display:flex;justify-content:flex-end;gap:12px;margin-top:25px;padding-top:20px;border-top:1px solid #e6e6ec}.btn{border:0;border-radius:6px;padding:13px 25px;cursor:pointer;font-weight:800}.btn-green{background:var(--green);color:#fff}.btn-gray{background:#fff;border:1px solid #aaa;color:#333}
+.footer{background:var(--navy);color:#fff;padding:24px 5%;display:flex;justify-content:space-between;align-items:center;font-size:13px}.footer a{color:#fff;text-decoration:none;margin-right:18px}
+.toast{position:fixed;right:25px;bottom:25px;background:#17203d;color:#fff;padding:14px 18px;border-radius:7px;display:none;z-index:100}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;z-index:100}.modal-card{background:#fff;border-radius:12px;max-width:480px;width:90%;padding:28px;text-align:center}.farmer-id{font-size:25px;font-weight:800;color:var(--green);letter-spacing:1px}
+@media(max-width:950px){.header{flex-wrap:wrap}.brand{border:0;padding:0}.search{width:100%}.nav{gap:16px;overflow:auto}.choice-grid{grid-template-columns:repeat(2,1fr)}.section-grid,.upload-grid,.review{grid-template-columns:1fr}}
+@media(max-width:600px){.toplinks{display:none}.choice-grid{grid-template-columns:1fr}.title-row{align-items:flex-start;flex-direction:column}}
+
+.final-check{border:1px solid #dfe1e9;border-radius:8px;margin:15px 0;padding:17px;background:#fff}
+.check-head{font-weight:800;font-size:16px;margin-bottom:12px;color:#17203d}
+.submit-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;color:#35513f;font-size:14px}
+</style>
+<link rel="stylesheet" href="css/whatsapp-bot.css">
+</head>
+<body>
+<div class="topbar"><div>भारत सरकार | Government of India</div><div class="toplinks"><span>स्क्रीन रीडर</span><span>A-</span><span>A</span><span>A+</span><span>हिंदी / English</span></div></div>
+
+<header class="header">
+  <img class="logo" src="apni-baari-logo.png" alt="अपनी BAARI">
+  <div class="brand"><h1>हर किसान की बारी, सही समय की जानकारी</h1><h2>किसान सूचना एवं सेवा पोर्टल</h2><p>Ministry of Consumer Affairs, Food and Public Distribution</p></div>
+  <div class="search"><input placeholder="Search Services"><span>⌕</span></div>
+</header>
+
+<nav class="nav">
+  <a href="index.html">होम</a><a href="about.html">हमारे बारे में</a><a href="services.html">सेवाएँ</a><a href="procurement.html">ई-उपार्जन</a><a href="dashboard.html">डैशबोर्ड</a><a href="reports.html">रिपोर्ट</a><a href="contact.html">संपर्क करें</a>
+  <span class="spacer"></span><a href="login.html">Login</a><a class="btn-outline" href="registration.html">Register</a>
+</nav>
+<div class="price-ticker" id="latest-price-bar" role="region" aria-label="Latest MSP prices"><div class="price-ticker-track"><span class="price-label">LATEST MSP / नवीनतम MSP</span><strong>🌾 गेहूँ ₹2,425 / क्विंटल</strong><strong>🌾 धान ₹2,320 / क्विंटल</strong><strong>🌾 सरसों ₹5,950 / क्विंटल</strong><strong>🌾 चना ₹5,650 / क्विंटल</strong><strong>अपनी BAARI • किसान मूल्य सूचना</strong><span class="price-label">LATEST MSP / नवीनतम MSP</span><strong>🌾 गेहूँ ₹2,425 / क्विंटल</strong><strong>🌾 धान ₹2,320 / क्विंटल</strong><strong>🌾 सरसों ₹5,950 / क्विंटल</strong><strong>🌾 चना ₹5,650 / क्विंटल</strong></div></div>
+
+
+<div class="notice">ⓘ किसान पंजीकरण फॉर्म एक ही पेज पर है। सभी अनिवार्य जानकारी और आवश्यक दस्तावेज़ भरने के बाद नीचे “पंजीकरण जमा करें” दबाएं।</div>
+
+<main class="container" id="registration">
+  <div class="title-row"><div><h1>👤 किसान पंजीकरण</h1><p>नीचे दिए गए सभी अनुभाग इसी एक पेज पर भरें। अलग-अलग पेज पर जाने की आवश्यकता नहीं है।</p></div><div class="required">* अनिवार्य फ़ील्ड</div></div>
+
+  <section class="form-section" id="applicant">
+    <h2>1. आवेदक का विवरण</h2><p class="sub">आवेदक की मूल जानकारी भरें।</p>
+    <div class="section-grid">
+      <div class="field"><label>मोबाइल नंबर <span class="req">*</span></label><input id="mobile" maxlength="10" inputmode="numeric" placeholder="10 अंकों का मोबाइल नंबर"><span class="help">मोबाइल नंबर आवेदन की स्थिति की जानकारी के लिए उपयोग किया जाएगा।</span></div>
+      <div class="field"><label>पूरा नाम <span class="req">*</span></label><input id="name" placeholder="नाम दर्ज करें"></div>
+      <div class="field"><label>पिता / पति / अभिभावक का नाम <span class="req">*</span></label><input id="guardian" placeholder="नाम दर्ज करें"></div>
+      <div class="field"><label>जन्म तिथि <span class="req">*</span></label><input id="dob" type="date"></div>
+      <div class="field"><label>लिंग <span class="req">*</span></label><select id="gender"><option value="">चयन करें</option><option>पुरुष</option><option>महिला</option><option>अन्य</option></select></div>
+      <div class="field"><label>श्रेणी <span class="req">*</span></label><select id="category"><option value="">चयन करें</option><option>सामान्य</option><option>OBC</option><option>SC</option><option>ST</option><option>अन्य</option></select></div>
+    </div>
+  </section>
+
+  <section class="form-section" id="identity">
+    <h2>2. पहचान विवरण</h2><p class="sub">सरकारी सत्यापन के लिए पहचान संबंधी विवरण दें।</p>
+    <div class="section-grid">
+      <div class="field"><label>पहचान का प्रकार <span class="req">*</span></label><select id="identityType"><option value="">चयन करें</option><option>Aadhaar</option><option>Voter ID</option><option>Other Government ID</option></select></div>
+      <div class="field"><label>पहचान संख्या <span class="req">*</span></label><input id="identityNo" placeholder="पहचान संख्या दर्ज करें"></div>
+      <div class="field full"><label>स्थायी पता <span class="req">*</span></label><textarea id="address" rows="3" placeholder="पूरा पता"></textarea></div>
+    </div>
+    <div class="info">🔒 पहचान जानकारी का उपयोग केवल लागू सत्यापन प्रक्रिया के लिए किया जाना चाहिए। वास्तविक तैनाती में संवेदनशील पहचान संख्या को सुरक्षित/मास्क करके संभालें।</div>
+  </section>
+
+  <section class="form-section" id="cultivation">
+    <h2>3. आप किस प्रकार खेती करते हैं?</h2><p class="sub">एक विकल्प चुनें। इसी आधार पर नीचे दिखाए गए प्रमाण/दस्तावेज़ लागू होंगे।</p>
+    <div class="choice-grid">
+      <label class="choice" data-type="owner"><input type="radio" name="cultivationType" value="owner"><div class="icon">🌾</div><h3>भूमि स्वामी</h3><p>अपने नाम की भूमि पर खेती करता/करती हूं।</p></label>
+      <label class="choice" data-type="tenant"><input type="radio" name="cultivationType" value="tenant"><div class="icon">📄</div><h3>किरायेदार</h3><p>लीज/किरायेदारी के आधार पर भूमि पर खेती करता/करती हूं।</p></label>
+      <label class="choice" data-type="sharecropper"><input type="radio" name="cultivationType" value="sharecropper"><div class="icon">🤝</div><h3>बटाईदार / हिस्सेदार</h3><p>सहमति/हिस्सेदारी के आधार पर खेती करता/करती हूं।</p></label>
+      <label class="choice" data-type="joint"><input type="radio" name="cultivationType" value="joint"><div class="icon">👨‍🌾</div><h3>संयुक्त स्वामी</h3><p>संयुक्त स्वामित्व वाली भूमि पर खेती करता/करती हूं।</p></label>
+    </div>
+    <div class="dynamic" id="typeInfo">कृपया ऊपर से खेती का प्रकार चुनें।</div>
+  </section>
+
+  <section class="form-section" id="land">
+    <h2>4. भूमि एवं खेती का विवरण</h2><p class="sub">जिस भूमि पर खेती करते हैं उसका विवरण भरें।</p>
+    <div class="section-grid">
+      <div class="field"><label>राज्य <span class="req">*</span></label><select id="state"><option value="">चयन करें</option><option>उत्तर प्रदेश</option><option>मध्य प्रदेश</option><option>राजस्थान</option><option>बिहार</option><option>महाराष्ट्र</option><option>अन्य</option></select></div>
+      <div class="field"><label>जिला <span class="req">*</span></label><input id="district" placeholder="जिला"></div>
+      <div class="field"><label>तहसील / ब्लॉक <span class="req">*</span></label><input id="tehsil" placeholder="तहसील / ब्लॉक"></div>
+      <div class="field"><label>गांव <span class="req">*</span></label><input id="village" placeholder="गांव"></div>
+      <div class="field"><label>खसरा / सर्वे नंबर <span class="req">*</span></label><input id="khasra" placeholder="खसरा / सर्वे नंबर"></div>
+      <div class="field"><label>भूमि रिकॉर्ड / खाता संख्या</label><input id="khata" placeholder="खाता संख्या"></div>
+      <div class="field"><label>कुल भूमि क्षेत्र (हेक्टेयर) <span class="req">*</span></label><input id="totalLand" type="number" min="0" step="0.01" placeholder="जैसे 2.50"></div>
+      <div class="field"><label>खेती योग्य भूमि (हेक्टेयर) <span class="req">*</span></label><input id="cultivable" type="number" min="0" step="0.01" placeholder="जैसे 1.80"></div>
+      <div class="field"><label>सिंचित भूमि (हेक्टेयर)</label><input id="irrigated" type="number" min="0" step="0.01"></div>
+      <div class="field"><label>असिंचित भूमि (हेक्टेयर)</label><input id="rainfed" type="number" min="0" step="0.01"></div>
+      <div class="field"><label>मुख्य फसल <span class="req">*</span></label><select id="crop"><option value="">चयन करें</option><option>गेहूं</option><option>धान</option><option>दलहन</option><option>तिलहन</option><option>गन्ना</option><option>सब्जियां</option><option>फल</option><option>अन्य</option></select></div>
+      <div class="field"><label>वर्तमान मौसम की फसल</label><input id="seasonCrop" placeholder="फसल का नाम"></div>
+      <div class="field"><label>सिंचाई का स्रोत <span class="req">*</span></label><select id="irrigation"><option value="">चयन करें</option><option>नहर</option><option>बोरवेल</option><option>ट्यूबवेल</option><option>कुआं</option><option>वर्षा आधारित</option><option>अन्य</option></select></div>
+      <div class="field"><label>कृषि अनुभव (वर्ष) <span class="req">*</span></label><input id="experience" type="number" min="0" placeholder="वर्ष"></div>
+      <div class="field"><label>बैंक खाता संख्या</label><input id="bank" inputmode="numeric" placeholder="DBT के लिए, जहां लागू हो"></div>
+      <div class="field"><label>IFSC</label><input id="ifsc" placeholder="जैसे SBIN0000000"></div>
+      <div class="field full"><label>अन्य कृषि जानकारी</label><textarea id="otherAgri" rows="3" placeholder="वैकल्पिक"></textarea></div>
+    </div>
+  </section>
+
+  <section class="form-section" id="documents">
+    <h2>5. सभी आवश्यक दस्तावेज़</h2><p class="sub">यहां सभी दस्तावेज़ एक ही पेज पर दिखाई देंगे। आपके चुने हुए खेती प्रकार के अनुसार संबंधित प्रमाण आवश्यक होंगे।</p>
+    <div class="upload-grid">
+      <div class="upload"><div class="doc-title">पहचान प्रमाण <span class="doc-badge">अनिवार्य</span></div><input id="docIdentity" type="file" accept=".jpg,.jpeg,.png,.pdf"><small>JPG, PNG या PDF — अधिकतम 2 MB</small></div>
+      <div class="upload"><div class="doc-title">भूमि रिकॉर्ड / RoR <span class="doc-badge" id="landBadge">चयन के अनुसार</span></div><input id="docLand" type="file" accept=".jpg,.jpeg,.png,.pdf"><small>खसरा/सर्वे/खाता/Record of Rights आदि, जहां लागू हो</small></div>
+      <div class="upload"><div class="doc-title">किरायेदारी / लीज प्रमाण <span class="doc-badge optional" id="leaseBadge">चयन के अनुसार</span></div><input id="docLease" type="file" accept=".jpg,.jpeg,.png,.pdf"><small>किरायेदार के लिए लागू लीज/किरायेदारी प्रमाण</small></div>
+      <div class="upload"><div class="doc-title">बटाई / कब्जा / सहमति प्रमाण <span class="doc-badge optional" id="shareBadge">चयन के अनुसार</span></div><input id="docShare" type="file" accept=".jpg,.jpeg,.png,.pdf"><small>बटाईदार/हिस्सेदार के लिए लागू मान्य प्रमाण</small></div>
+      <div class="upload"><div class="doc-title">संयुक्त स्वामित्व प्रमाण <span class="doc-badge optional" id="jointBadge">चयन के अनुसार</span></div><input id="docJoint" type="file" accept=".jpg,.jpeg,.png,.pdf"><small>संयुक्त रिकॉर्ड/सह-स्वामित्व संबंधी दस्तावेज़, जहां लागू हो</small></div>
+      <div class="upload"><div class="doc-title">बैंक / DBT प्रमाण <span class="doc-badge optional">जहां लागू हो</span></div><input id="docBank" type="file" accept=".jpg,.jpeg,.png,.pdf"><small>बैंक पासबुक/रद्द चेक आदि, लागू नियमों के अनुसार</small></div>
+      <div class="upload"><div class="doc-title">पासपोर्ट साइज फोटो <span class="doc-badge">अनिवार्य</span></div><input id="docPhoto" type="file" accept=".jpg,.jpeg,.png"><small>हाल की JPG/PNG फोटो</small></div>
+      <div class="upload"><div class="doc-title">अन्य दस्तावेज़ <span class="doc-badge optional">वैकल्पिक</span></div><input id="docOther" type="file" accept=".jpg,.jpeg,.png,.pdf"><small>यदि कोई अतिरिक्त प्रमाण आवश्यक हो</small></div>
+    </div>
+    <div class="info" id="docInstruction">पहले खेती का प्रकार चुनें। फिर इसी पेज पर संबंधित दस्तावेज़ को “अनिवार्य” के रूप में दिखाया जाएगा।</div>
+  </section>
+
+  <section class="form-section" id="review">
+    <h2>6. अंतिम समीक्षा एवं पंजीकरण जमा करें</h2>
+    <p class="sub">यह अंतिम भरने वाला अनुभाग है। नीचे आवेदन की पूरी जानकारी की जांच करें, आवश्यक घोषणा स्वीकार करें और पंजीकरण जमा करें।</p>
+
+    <div class="final-check">
+      <div class="check-head">आवेदन की जानकारी</div>
+      <div class="review" id="reviewBox"></div>
+    </div>
+
+    <div class="final-check">
+      <div class="check-head">अपलोड किए गए दस्तावेज़</div>
+      <div class="review" id="documentReview"></div>
+    </div>
+
+    <div class="final-check">
+      <div class="check-head">अंतिम घोषणा</div>
+      <label class="checkbox">
+        <input id="declaration" type="checkbox">
+        <span>
+          मैं घोषणा करता/करती हूं कि इस आवेदन में दी गई सभी जानकारी मेरे ज्ञान के अनुसार सही है।
+          मेरे द्वारा अपलोड किए गए दस्तावेज़ संबंधित और वैध हैं। मैं सहमत हूं कि संबंधित सरकारी
+          विभाग/अधिकारी मेरे आवेदन, भूमि एवं कृषि विवरणों का लागू नियमों के अनुसार सत्यापन कर सकते हैं।
+          <span class="req">*</span>
+        </span>
+      </label>
+    </div>
+
+    <div class="final-check">
+      <div class="check-head">आवेदन जमा करने से पहले</div>
+      <div class="submit-list">
+        <div>✓ सभी * अनिवार्य जानकारी भरी गई है</div>
+        <div>✓ खेती का प्रकार चुना गया है</div>
+        <div>✓ संबंधित भूमि/कृषि विवरण भरे गए हैं</div>
+        <div>✓ आवश्यक दस्तावेज़ अपलोड किए गए हैं</div>
+        <div>✓ अंतिम घोषणा स्वीकार की गई है</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-gray" onclick="updateReview(); document.getElementById('review').scrollIntoView({behavior:'smooth'})">↻ समीक्षा अपडेट करें</button>
+      <button type="button" class="btn btn-green" onclick="submitRegistration()">पंजीकरण जमा करें ✓</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer"><div><a href="#">गोपनीयता नीति</a><a href="#">उपयोग की शर्तें</a><a href="#">साइटमैप</a><a href="#">सहायता</a><a href="#">फीडबैक</a></div><div>© 2026 अपनी BAARI. सर्वाधिकार सुरक्षित।<br>यह वेबसाइट भारत सरकार की आधिकारिक वेबसाइट है।</div></footer>
+
+<div class="toast" id="toast"></div>
+<div class="modal" id="successModal"><div class="modal-card"><div style="font-size:52px">✅</div><h2>आवेदन सफलतापूर्वक जमा हुआ</h2><p>आपका आवेदन सरकारी सत्यापन के लिए भेजा गया है।</p><div class="farmer-id" id="applicationId"></div><p style="color:#666">Farmer ID सत्यापन पूर्ण होने के बाद जारी की जाएगी।</p><button class="btn btn-green" onclick="location.reload()">ठीक है</button></div></div>
+
+<script>
+let selectedType="";
+const requiredBase=["mobile","name","guardian","dob","gender","category","identityType","identityNo","address","state","district","tehsil","village","khasra","totalLand","cultivable","crop","irrigation","experience"];
+const typeText={owner:"भूमि स्वामी",tenant:"किरायेदार",sharecropper:"बटाईदार / हिस्सेदार",joint:"संयुक्त स्वामी"};
+
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";setTimeout(()=>t.style.display="none",3000)}
+function chooseType(type){
+ selectedType=type;
+ document.querySelectorAll(".choice").forEach(c=>c.classList.toggle("selected",c.dataset.type===type));
+ document.querySelector(`.choice[data-type="${type}"] input`).checked=true;
+ const info={
+ owner:"आपके नाम/स्वामित्व से जुड़े भूमि रिकॉर्ड के आधार पर सत्यापन होगा। भूमि रिकॉर्ड / RoR आवश्यक है।",
+ tenant:"आपकी किरायेदारी/लीज और संबंधित भूमि विवरण का सत्यापन होगा। भूमि रिकॉर्ड तथा लागू किरायेदारी/लीज प्रमाण दें।",
+ sharecropper:"खेती/कब्जे और सहमति/हिस्सेदारी के लागू प्रमाण की जांच होगी। भूमि विवरण भी भरना होगा।",
+ joint:"संयुक्त भूमि रिकॉर्ड और सह-स्वामित्व विवरण के आधार पर सत्यापन होगा।"
+ }[type];
+ document.getElementById("typeInfo").innerHTML="<b>✓ चयन: "+typeText[type]+"</b><br>"+info;
+ const req={landBadge:"चयन के अनुसार",leaseBadge:"चयन के अनुसार",shareBadge:"चयन के अनुसार",jointBadge:"चयन के अनुसार"};
+ req.landBadge="अनिवार्य";
+ if(type==="tenant") req.leaseBadge="अनिवार्य";
+ if(type==="sharecropper") req.shareBadge="अनिवार्य";
+ if(type==="joint") req.jointBadge="अनिवार्य";
+ Object.entries(req).forEach(([id,txt])=>document.getElementById(id).textContent=txt);
+ document.getElementById("docInstruction").textContent=
+  type==="owner"?"भूमि स्वामी के लिए पहचान प्रमाण, भूमि रिकॉर्ड/RoR और फोटो अनिवार्य हैं।":
+  type==="tenant"?"किरायेदार के लिए पहचान प्रमाण, भूमि रिकॉर्ड/RoR, किरायेदारी/लीज प्रमाण और फोटो अनिवार्य हैं।":
+  type==="sharecropper"?"बटाईदार/हिस्सेदार के लिए पहचान प्रमाण, भूमि रिकॉर्ड/भूमि विवरण, बटाई/कब्जा/सहमति प्रमाण और फोटो अनिवार्य हैं।":
+  "संयुक्त स्वामी के लिए पहचान प्रमाण, संयुक्त भूमि रिकॉर्ड, संयुक्त स्वामित्व प्रमाण और फोटो अनिवार्य हैं।";
+ updateReview();
+}
+document.querySelectorAll(".choice").forEach(c=>c.addEventListener("click",()=>chooseType(c.dataset.type)));
+document.querySelectorAll("input,select,textarea").forEach(e=>e.addEventListener("input",updateReview));
+
+function val(id){const e=document.getElementById(id);return e?e.value.trim():""}
+function updateReview(){
+ const box=document.getElementById("reviewBox");
+ const items=[
+  ["पूरा नाम",val("name")||"—"],
+  ["मोबाइल",val("mobile")||"—"],
+  ["पिता/पति/अभिभावक",val("guardian")||"—"],
+  ["जन्म तिथि",val("dob")||"—"],
+  ["लिंग / श्रेणी",(val("gender")||"—")+" / "+(val("category")||"—")],
+  ["पहचान प्रकार",val("identityType")||"—"],
+  ["पहचान संख्या",val("identityNo")||"—"],
+  ["पता",val("address")||"—"],
+  ["खेती का प्रकार",typeText[selectedType]||"—"],
+  ["राज्य / जिला",(val("state")||"—")+" / "+(val("district")||"—")],
+  ["तहसील / ब्लॉक",val("tehsil")||"—"],
+  ["गांव",val("village")||"—"],
+  ["खसरा / सर्वे",val("khasra")||"—"],
+  ["कुल भूमि",(val("totalLand")||"—")+" ha"],
+  ["खेती योग्य भूमि",(val("cultivable")||"—")+" ha"],
+  ["मुख्य फसल",val("crop")||"—"],
+  ["सिंचाई",val("irrigation")||"—"],
+  ["कृषि अनुभव",(val("experience")||"—")+" वर्ष"]
+ ];
+ box.innerHTML=items.map(x=>`<div class="review-item"><b>${x[0]}</b>${x[1]}</div>`).join("");
+
+ const docs=[
+  ["पहचान प्रमाण","docIdentity"],
+  ["भूमि रिकॉर्ड / RoR","docLand"],
+  ["किरायेदारी / लीज प्रमाण","docLease"],
+  ["बटाई / कब्जा / सहमति प्रमाण","docShare"],
+  ["संयुक्त स्वामित्व प्रमाण","docJoint"],
+  ["बैंक / DBT प्रमाण","docBank"],
+  ["पासपोर्ट साइज फोटो","docPhoto"],
+  ["अन्य दस्तावेज़","docOther"]
+ ];
+ const dr=document.getElementById("documentReview");
+ dr.innerHTML=docs.map(([label,id])=>{
+   const f=document.getElementById(id);
+   const name=f && f.files.length ? f.files[0].name : "अभी अपलोड नहीं किया गया";
+   const ok=f && f.files.length;
+   return `<div class="review-item"><b>${label}</b><span style="color:${ok?'#087f45':'#a34b35'}">${ok?'✓ ':''}${name}</span></div>`;
+ }).join("");
+}
+
+function fileRequired(id,msg){
+ const f=document.getElementById(id); if(!f.files.length){toast(msg);f.scrollIntoView({behavior:"smooth",block:"center"});return false} return true;
+}
+function validate(){
+ if(!selectedType){toast("कृपया खेती का प्रकार चुनें।");document.getElementById("cultivation").scrollIntoView({behavior:"smooth"});return false}
+ for(const id of requiredBase){const e=document.getElementById(id);if(!val(id)){toast("कृपया सभी * अनिवार्य फ़ील्ड भरें।");e.scrollIntoView({behavior:"smooth",block:"center"});e.focus();return false}}
+ if(!fileRequired("docIdentity","पहचान प्रमाण अपलोड करें।"))return false;
+ if(!fileRequired("docLand","भूमि रिकॉर्ड / RoR अपलोड करें।"))return false;
+ if(selectedType==="tenant"&&!fileRequired("docLease","किरायेदारी / लीज प्रमाण अपलोड करें।"))return false;
+ if(selectedType==="sharecropper"&&!fileRequired("docShare","बटाई / कब्जा / सहमति प्रमाण अपलोड करें।"))return false;
+ if(selectedType==="joint"&&!fileRequired("docJoint","संयुक्त स्वामित्व प्रमाण अपलोड करें।"))return false;
+ if(!fileRequired("docPhoto","पासपोर्ट साइज फोटो अपलोड करें।"))return false;
+ updateReview();
+ if(!document.getElementById("declaration").checked){toast("कृपया घोषणा स्वीकार करें।");return false}
+ return true;
+}
+async function submitRegistration(){
+ if(!validate())return;
+ const payload={
+   full_name: val("name"),
+   mobile_number: val("mobile"),
+   state: val("state"),
+   district: val("district"),
+   block: "",
+   village: val("village")
+ };
+ let id;
+ try{
+   const r=await fetch('/api/farmers/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+   if(!r.ok){
+     const err=await r.json().catch(()=>({detail:'Registration failed'}));
+     if(r.status===409){
+       toast('इस मोबाइल नंबर से पहले ही पंजीकरण हो चुका है। / Already registered with this mobile number.');
+       return;
+     }
+     throw new Error(err.detail||'Registration failed');
+   }
+   const farmer=await r.json();
+   id=farmer.farmer_id;
+ }catch(e){
+   // Backend unreachable: fall back to a local-only demo ID so the UI still
+   // works, but the farmer will NOT be able to authenticate on WhatsApp
+   // until the backend is reachable and they register again.
+   id="BAARI-"+new Date().getFullYear()+"-"+Math.floor(100000+Math.random()*900000);
+   toast('⚠️ Server unavailable — showing demo confirmation only. Please register again once the server is reachable so WhatsApp login works.');
+ }
+ document.getElementById("applicationId").textContent=id;
+ document.getElementById("successModal").style.display="flex";
+}
+updateReview();
+</script>
+<script src="js/whatsapp-bot.js"></script>
+
+<button class="wa-fab" id="waFab" aria-label="Open Apni BAARI WhatsApp Help" aria-expanded="false" title="अपनी BAARI WhatsApp Help"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 3C8.82 3 3 8.62 3 15.55c0 2.48.75 4.78 2.04 6.7L3.25 29l6.98-1.77A13.22 13.22 0 0 0 16 28.1c7.18 0 13-5.62 13-12.55S23.18 3 16 3Zm0 22.85c-2.1 0-4.04-.62-5.68-1.69l-.4-.26-4.14 1.05 1.1-3.94-.28-.42a10.2 10.2 0 0 1-1.61-5.04C4.99 10.02 9.93 5.3 16 5.3s11.01 4.72 11.01 10.25S22.07 25.85 16 25.85Zm6.36-7.72c-.34-.17-2-1-2.31-1.11-.31-.11-.54-.17-.77.17-.23.34-.88 1.11-1.08 1.34-.2.23-.4.26-.74.09-.34-.17-1.43-.51-2.72-1.62-1.01-.87-1.69-1.94-1.89-2.28-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.09-.17-.77-1.85-1.06-2.54-.28-.67-.56-.58-.77-.59h-.66c-.23 0-.6.09-.91.43-.31.34-1.2 1.17-1.2 2.85s1.23 3.31 1.4 3.54c.17.23 2.41 3.68 5.85 5.16.82.35 1.46.56 1.96.71.82.25 1.56.21 2.15.13.66-.1 2-.82 2.28-1.62.28-.8.28-1.48.2-1.62-.08-.14-.31-.23-.65-.4Z"/></svg></button>
+<div class="wa-window" id="waWindow" role="dialog" aria-label="अपनी BAARI WhatsApp Help">
+  <div class="wa-head"><div class="wa-head-icon"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 3C8.82 3 3 8.62 3 15.55c0 2.48.75 4.78 2.04 6.7L3.25 29l6.98-1.77A13.22 13.22 0 0 0 16 28.1c7.18 0 13-5.62 13-12.55S23.18 3 16 3Zm0 22.85c-2.1 0-4.04-.62-5.68-1.69l-.4-.26-4.14 1.05 1.1-3.94-.28-.42a10.2 10.2 0 0 1-1.61-5.04C4.99 10.02 9.93 5.3 16 5.3s11.01 4.72 11.01 10.25S22.07 25.85 16 25.85Zm6.36-7.72c-.34-.17-2-1-2.31-1.11-.31-.11-.54-.17-.77.17-.23.34-.88 1.11-1.08 1.34-.2.23-.4.26-.74.09-.34-.17-1.43-.51-2.72-1.62-1.01-.87-1.69-1.94-1.89-2.28-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.09-.17-.77-1.85-1.06-2.54-.28-.67-.56-.58-.77-.59h-.66c-.23 0-.6.09-.91.43-.31.34-1.2 1.17-1.2 2.85s1.23 3.31 1.4 3.54c.17.23 2.41 3.68 5.85 5.16.82.35 1.46.56 1.96.71.82.25 1.56.21 2.15.13.66-.1 2-.82 2.28-1.62.28-.8.28-1.48.2-1.62-.08-.14-.31-.23-.65-.4Z"/></svg></div><div class="wa-head-title">अपनी BAARI Help Bot<div class="wa-sub">WhatsApp-style • Click an option, no typing required</div></div><button class="wa-close" id="waClose" aria-label="Close">×</button></div>
+  <div class="wa-body" id="waBody"><div class="wa-bubble bot">नमस्ते! 👋 अपनी BAARI में आपका स्वागत है। नीचे कोई भी विकल्प चुनें — आपको कुछ टाइप करने की जरूरत नहीं है।</div></div>
+  <div class="wa-options"><button class="wa-option" onclick="chooseWhatsApp('status')">🎫 टोकन स्थिति</button><button class="wa-option" onclick="chooseWhatsApp('booking')">📅 टोकन बुक करें</button><button class="wa-option" onclick="chooseWhatsApp('msp')">💰 आज की MSP</button><button class="wa-option" onclick="chooseWhatsApp('weather')">🌧️ मौसम अलर्ट</button><button class="wa-option" onclick="chooseWhatsApp('payment')">🏦 भुगतान स्थिति</button><button class="wa-help" id="waHelp">❓ मदद / Help</button></div>
+</div>
+</body>
+</html>

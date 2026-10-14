@@ -1,0 +1,6 @@
+.env
+__pycache__/
+*.pyc
+apni_baari.db
+.venv/
+venv/

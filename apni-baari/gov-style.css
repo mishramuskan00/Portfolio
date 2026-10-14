@@ -1,0 +1,480 @@
+
+:root{
+  --navy:#17183f;
+  --navy-2:#24245a;
+  --indigo:#353477;
+  --lavender:#f1effb;
+  --orange:#f2a61a;
+  --green:#2f7d32;
+  --text:#242424;
+  --muted:#60646f;
+  --border:#dedee8;
+  --bg:#ffffff;
+  --soft:#f7f7fa;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;color:var(--text);background:#fff;line-height:1.55}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+.container{width:min(1280px,92%);margin:auto}
+
+/* Government-style utility strip */
+.utility{background:var(--navy);color:#fff;font-size:14px}
+.utility-inner{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.utility a{opacity:.95}
+.utility-right{display:flex;gap:22px;align-items:center}
+.utility-right a:hover{text-decoration:underline}
+
+/* Branding */
+.branding{background:#fff;border-bottom:1px solid #ececf2}
+.branding-inner{min-height:132px;display:flex;align-items:center;gap:26px}
+.logo{width:205px;height:94px;object-fit:contain;object-position:left center}
+.brand-divider{height:78px;width:1px;background:#c8c8d0}
+.brand-copy{flex:1}
+.tagline{font-size:27px;font-weight:700;color:#bd4a1b;margin-bottom:6px}
+.department{font-size:18px;font-weight:700;color:#2d2d34}
+.department span{font-weight:400;color:#555}
+.search-box{display:flex;align-items:center;border:1px solid #c9cad8;border-radius:8px;overflow:hidden;width:310px;height:52px}
+.search-box input{border:0;outline:0;flex:1;padding:0 16px;color:#333}
+.search-box button{border:0;background:#fff;color:var(--indigo);padding:0 17px;cursor:pointer;font-size:20px}
+
+/* Navigation */
+.navbar{background:var(--lavender);box-shadow:0 2px 8px rgba(20,20,60,.08);position:sticky;top:0;z-index:20}
+.nav-inner{display:flex;align-items:center}
+.nav-links{display:flex;flex-wrap:wrap}
+.nav-links a{padding:18px 20px;color:#24245b;font-weight:600;border-bottom:3px solid transparent}
+.nav-links a:hover,.nav-links a.active{background:#fff;border-bottom-color:var(--orange)}
+.menu-toggle{display:none;margin-left:auto;background:none;border:0;font-size:28px;color:var(--indigo)}
+
+/* Hero / slider */
+.hero{padding:28px 0 12px}
+.slider{position:relative;overflow:hidden;border-radius:16px;border:1px solid #e0e0e8;background:#f4f5f8;min-height:430px}
+.slide{display:none;min-height:430px}
+.slide.active{display:block}
+.slide img{width:100%;height:430px;object-fit:cover;display:block}
+.slide-video{height:430px;display:flex;align-items:center;justify-content:center;background:linear-gradient(120deg,#eef3ff,#f8f4e8)}
+.video-card{width:min(700px,86%);background:#fff;border:1px solid #d8d9e3;border-radius:16px;padding:42px;text-align:center;box-shadow:0 12px 30px rgba(20,30,70,.08)}
+.video-card .play{width:74px;height:74px;border-radius:50%;border:0;background:var(--indigo);color:#fff;font-size:30px;cursor:pointer}
+.video-card h2{color:var(--navy);margin:18px 0 8px}
+.video-card p{color:var(--muted);margin:0}
+.slider-btn{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:var(--indigo);font-size:25px;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.12)}
+.prev{left:18px}.next{right:18px}
+.dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.dot{width:10px;height:10px;border-radius:50%;border:0;background:#bbb;cursor:pointer;padding:0}
+.dot.active{background:var(--indigo);transform:scale(1.25)}
+
+/* Section styles */
+.section{padding:44px 0}
+.section.alt{background:var(--soft)}
+.section-heading{text-align:center;margin-bottom:28px}
+.section-heading h2{margin:0 0 8px;color:var(--navy);font-size:31px}
+.section-heading p{margin:0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;transition:.2s;box-shadow:0 4px 12px rgba(25,25,65,.04)}
+.card:hover{transform:translateY(-3px);box-shadow:0 9px 20px rgba(25,25,65,.09)}
+.icon{width:48px;height:48px;border-radius:9px;background:#eef0fb;color:var(--indigo);display:grid;place-items:center;font-size:24px;margin-bottom:14px}
+.card h3{margin:0 0 7px;color:#22264f;font-size:20px}
+.card p{margin:0;color:var(--muted)}
+.card .link{display:inline-block;margin-top:14px;color:var(--indigo);font-weight:700}
+
+.notice-strip{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:14px;margin-top:20px}
+.notice{border-left:5px solid var(--orange);background:#fff;border:1px solid var(--border);padding:18px;border-radius:8px}
+.notice strong{display:block;color:var(--navy);margin-bottom:4px}
+.notice small{color:var(--muted)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{padding:25px;background:#fff;border:1px solid var(--border);border-radius:10px;text-align:center}
+.stat .num{font-size:31px;font-weight:800;color:var(--indigo)}
+.stat p{margin:5px 0 0;color:var(--muted)}
+
+.info-banner{background:linear-gradient(90deg,#f3f0ff,#fff9ed);border:1px solid #ded9ef;border-radius:14px;padding:28px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.info-banner h2{margin:0;color:var(--navy)}
+.btn{display:inline-block;border:0;border-radius:7px;padding:12px 20px;background:var(--indigo);color:#fff;font-weight:700;cursor:pointer}
+.btn.secondary{background:#fff;color:var(--indigo);border:1px solid var(--indigo)}
+.btn.green{background:var(--green)}
+
+/* Inner pages */
+.page-hero{background:#f4f3fb;border-bottom:1px solid #e2e1eb;padding:34px 0}
+.page-hero h1{margin:0;color:var(--navy);font-size:36px}
+.breadcrumb{color:var(--muted);font-size:14px;margin-top:7px}
+.content{padding:42px 0}
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:28px}
+.panel{border:1px solid var(--border);border-radius:12px;padding:26px;background:#fff}
+.panel h2,.panel h3{color:var(--navy);margin-top:0}
+.list{padding-left:20px}
+.list li{margin-bottom:9px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field input,.field select,.field textarea{border:1px solid #cfd1dc;border-radius:7px;padding:12px;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(53,52,119,.1)}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid var(--border);padding:13px;text-align:left}
+th{background:#f2f1f8;color:var(--navy)}
+.badge{display:inline-block;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:700;background:#eaf5eb;color:var(--green)}
+.badge.pending{background:#fff4dc;color:#9a6800}
+
+/* Footer based on the reference layout */
+.footer{background:#fff;border-top:1px solid #e5e5ec;margin-top:30px}
+.footer-top{padding:38px 0 20px;background:
+  radial-gradient(circle at 90% 10%,rgba(53,52,119,.05),transparent 28%),
+  #fff}
+.footer-brand{display:flex;align-items:center;gap:18px;padding-bottom:24px;border-bottom:1px solid #e5e5ec}
+.footer-brand img{width:190px;height:80px;object-fit:contain;object-position:left center}
+.social{margin-left:auto;display:flex;gap:12px}
+.social a{width:36px;height:36px;border:1px solid #d9d9e2;border-radius:50%;display:grid;place-items:center;color:#444}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;padding:32px 0}
+.footer-col h3{font-size:17px;color:var(--navy);margin:0 0 14px}
+.footer-col a{display:block;color:#555;margin:9px 0;font-size:14px}
+.footer-col a:hover{color:var(--indigo);text-decoration:underline}
+.footer-bottom{background:var(--navy);color:#fff;padding:17px 0;font-size:13px}
+.footer-bottom-inner{display:flex;justify-content:space-between;gap:20px}
+
+@media(max-width:900px){
+  .branding-inner{min-height:110px;gap:15px}
+  .logo{width:160px}
+  .tagline{font-size:21px}
+  .department{font-size:15px}
+  .search-box{width:220px}
+  .nav-links a{padding:14px 12px;font-size:14px}
+  .grid{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .notice-strip{grid-template-columns:1fr}
+  .two-col{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .utility-inner{padding:8px 0}
+  .utility-right a:nth-child(n+2){display:none}
+  .branding-inner{flex-wrap:wrap;padding:15px 0}
+  .brand-divider{display:none}
+  .logo{width:145px;height:70px}
+  .brand-copy{min-width:200px}
+  .tagline{font-size:18px}
+  .department{font-size:13px}
+  .search-box{order:3;width:100%}
+  .nav-inner{padding:8px 0}
+  .nav-links{display:none;width:100%;flex-direction:column}
+  .nav-links.open{display:flex}
+  .nav-links a{background:#fff;border-bottom:1px solid #eee}
+  .menu-toggle{display:block}
+  .slider,.slide,.slide img,.slide-video{min-height:360px;height:360px}
+  .slide img{height:360px}
+  .grid,.stats,.form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .info-banner{flex-direction:column;align-items:flex-start}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-brand{align-items:flex-start}
+  .social{margin-left:0}
+  .footer-bottom-inner{flex-direction:column}
+}
+
+/* Government dashboard content - keeps the farmer portal visual system */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.kpi{padding:22px;background:#fff;border:1px solid var(--border);border-radius:10px}.kpi .label{color:var(--muted);font-size:14px}.kpi .value{font-size:30px;font-weight:800;color:var(--indigo);margin-top:5px}.kpi .meta{font-size:12px;color:var(--green);margin-top:5px}
+.dashboard-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:22px;margin-top:22px}.map-card{min-height:420px;background:#f4f3fb;border:1px solid var(--border);border-radius:12px;padding:22px;position:relative}.map-area{height:300px;border-radius:10px;background:linear-gradient(135deg,#eef1e8,#f7f3e8);position:relative;overflow:hidden;border:1px solid #d9d9df}.map-area:before,.map-area:after{content:"";position:absolute;background:#fff;opacity:.8}.map-area:before{width:140%;height:12px;left:-20%;top:48%;transform:rotate(-18deg)}.map-area:after{width:140%;height:9px;left:-20%;top:67%;transform:rotate(22deg)}.marker{position:absolute;width:18px;height:18px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 7px #777;cursor:pointer}.normal{background:#2f7d32}.high{background:#f2a61a}.overloaded{background:#c93535}.m1{left:24%;top:34%}.m2{left:51%;top:53%}.m3{left:69%;top:30%}.m4{left:42%;top:76%}.m5{left:80%;top:68%}.map-legend{display:flex;gap:18px;font-size:13px;color:var(--muted);margin-top:12px}.legend-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.center-detail{border:1px solid var(--border);border-radius:12px;padding:22px;background:#fff}.center-detail h3{margin-top:0;color:var(--navy)}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.detail-item{background:#f7f7fa;border-radius:8px;padding:12px}.detail-item small{display:block;color:var(--muted);font-size:12px}.detail-item strong{color:var(--navy)}
+.alert{border:1px solid #e1d9c4;border-left:5px solid var(--orange);background:#fffaf0;border-radius:9px;padding:17px;margin-bottom:12px}.alert.red{border-left-color:#c93535;background:#fff5f5}.alert h3{margin:0 0 6px;color:var(--navy);font-size:17px}.alert p{margin:5px 0;color:var(--muted)}
+.progress-row{display:grid;grid-template-columns:100px 1fr 55px;align-items:center;gap:10px;margin:14px 0}.bar{height:10px;background:#e7e7ee;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--indigo);border-radius:99px}.pipeline{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.stage{background:#f7f7fa;border:1px solid var(--border);border-radius:9px;padding:14px;text-align:center}.stage strong{font-size:22px;color:var(--indigo);display:block}.stage span{font-size:12px;color:var(--muted)}
+.actions{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.action-btn{border:1px solid #cfd1dc;background:#fff;border-radius:8px;padding:14px;color:var(--indigo);font-weight:700;cursor:pointer}.action-btn:hover{border-color:var(--orange);background:#fffaf1}.filter-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}.filter-row input,.filter-row select{border:1px solid #cfd1dc;border-radius:7px;padding:11px 12px;background:#fff}.status-normal{color:var(--green);font-weight:700}.status-high{color:#9a6800;font-weight:700}.status-red{color:#b62d2d;font-weight:700}.small-note{font-size:12px;color:var(--muted);margin-top:8px}.chart{height:220px;display:flex;align-items:flex-end;gap:18px;padding:15px 8px;border-left:1px solid #ccc;border-bottom:1px solid #ccc;background:linear-gradient(#fff,#fafafd)}.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px}.bar-col i{display:block;width:55%;background:var(--indigo);border-radius:5px 5px 0 0}.bar-col span{font-size:12px;color:var(--muted)}.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(23,24,63,.42);z-index:50;align-items:center;justify-content:center;padding:20px}.modal-backdrop.show{display:flex}.modal{background:#fff;width:min(560px,100%);border-radius:12px;padding:25px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.2)}.modal h2{margin-top:0;color:var(--navy)}.modal-close{float:right;border:0;background:none;font-size:24px;cursor:pointer;color:#666}
+@media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr}.dashboard-grid{grid-template-columns:1fr}.pipeline{grid-template-columns:repeat(3,1fr)}.actions{grid-template-columns:1fr 1fr}.nav-links a{padding:13px 9px;font-size:13px}}
+@media(max-width:700px){.kpi-grid{grid-template-columns:1fr}.pipeline{grid-template-columns:1fr 1fr}.actions{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}}
+
+
+/* =========================================================
+   APNI BAARI — FINAL EXACT MATCH TO REGISTRATION PAGE
+   Shared visual language copied from registration.html.
+   ========================================================= */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
+html, body { font-family:"Noto Sans Devanagari",Inter,sans-serif !important; }
+body { line-height:normal !important; font-size:16px; }
+button,input,select,textarea { font-family:"Noto Sans Devanagari",Inter,sans-serif !important; }
+
+/* Exact registration-page header scale */
+.utility { height:40px; min-height:40px; font-size:14px; font-weight:400; }
+.utility-inner { min-height:40px; }
+.branding-inner { min-height:0; padding:16px 5%; gap:28px; }
+.logo { width:220px; height:90px; }
+.brand-divider { height:78px; }
+.tagline { font-size:26px !important; font-weight:800 !important; line-height:normal; margin-bottom:0; }
+.department { font-size:19px !important; font-weight:700 !important; line-height:normal; }
+.department span { font-size:15px !important; font-weight:400 !important; }
+.search-box { width:300px; height:45px; }
+.search-box input { font-size:16px !important; font-weight:400 !important; }
+
+/* Exact registration navigation scale */
+.navbar { height:60px; }
+.nav-inner { min-height:60px; }
+.nav-links { flex:1; gap:34px; align-items:center; }
+.nav-links a { padding:0 !important; height:60px; display:flex; align-items:center; border-bottom:3px solid transparent; font-size:16px !important; font-weight:700 !important; line-height:normal; }
+.nav-login { margin-left:auto !important; }
+
+/* Exact registration-style inner-page text scale */
+.page-hero { padding:28px 0; }
+.page-hero h1 { font-size:31px !important; font-weight:800 !important; line-height:normal; }
+.breadcrumb { font-size:14px !important; font-weight:400 !important; }
+.section-heading h2 { font-size:31px !important; font-weight:800 !important; line-height:normal; }
+.section-heading p { font-size:16px !important; font-weight:400 !important; }
+.panel h2 { font-size:22px !important; font-weight:700 !important; line-height:normal; }
+.panel h3,.card h3 { font-size:17px !important; font-weight:700 !important; line-height:normal; }
+.panel p,.card p,.list li,th,td,.stat p { font-size:16px !important; font-weight:400 !important; }
+.card .link,.action-btn { font-size:16px !important; font-weight:700 !important; }
+.btn { font-size:16px !important; font-weight:800 !important; }
+.stat .num { font-size:31px !important; font-weight:800 !important; }
+.notice strong { font-size:16px !important; font-weight:800 !important; }
+.notice small { font-size:13px !important; font-weight:400 !important; }
+
+/* Dashboard-specific text: remove the visibly oversized/thin treatment */
+.kpi .label { font-size:14px !important; font-weight:400 !important; }
+.kpi .value { font-size:30px !important; font-weight:800 !important; }
+.kpi .meta { font-size:12px !important; font-weight:400 !important; }
+.alert h3 { font-size:17px !important; font-weight:700 !important; }
+.alert p { font-size:16px !important; font-weight:400 !important; }
+.stage strong { font-size:22px !important; font-weight:800 !important; }
+.stage span,.small-note { font-size:12px !important; font-weight:400 !important; }
+
+/* Form/control text follows registration page */
+.field label { font-size:14px !important; font-weight:600 !important; }
+.field input,.field select,.field textarea { font-size:16px !important; font-weight:400 !important; }
+
+/* Footer typography */
+.footer-col h3 { font-size:17px !important; font-weight:700 !important; }
+.footer-col a { font-size:14px !important; font-weight:400 !important; }
+.footer-bottom { font-size:13px !important; font-weight:400 !important; }
+
+@media(max-width:900px){
+  .branding-inner { padding:16px 5%; gap:15px; }
+  .logo { width:160px; height:70px; }
+  .tagline { font-size:21px !important; }
+  .department { font-size:15px !important; }
+  .nav-links { gap:16px; }
+  .nav-links a { font-size:14px !important; }
+}
+@media(max-width:700px){
+  .branding-inner { padding:15px 5%; }
+  .logo { width:145px; height:70px; }
+  .tagline { font-size:18px !important; }
+  .department { font-size:13px !important; }
+  .nav-links { gap:0; }
+  .nav-links a { height:auto; padding:13px 9px !important; }
+}
+
+
+/* =========================================================
+   APNI BAARI — EXACT REGISTRATION PAGE HEADER/LAYOUT MATCH
+   Typography + placement + width geometry
+   ========================================================= */
+
+/* Registration page uses 5% side alignment for its header. */
+.utility-inner,
+.branding-inner,
+.nav-inner{
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding-left:5% !important;
+  padding-right:5% !important;
+}
+
+/* Exact registration header dimensions */
+.utility{
+  height:40px !important;
+  min-height:40px !important;
+  font-size:14px !important;
+}
+
+.branding-inner{
+  min-height:0 !important;
+  padding-top:16px !important;
+  padding-bottom:16px !important;
+  gap:28px !important;
+}
+
+.logo{
+  width:220px !important;
+  height:90px !important;
+  object-fit:contain !important;
+  object-position:left center !important;
+}
+
+.brand-divider{
+  height:78px !important;
+  width:1px !important;
+  flex:0 0 1px !important;
+}
+
+.brand-copy{
+  flex:1 !important;
+  min-width:0 !important;
+}
+
+.tagline{
+  margin:0 !important;
+  font-size:26px !important;
+  font-weight:800 !important;
+  line-height:normal !important;
+}
+
+.department{
+  margin:4px 0 0 !important;
+  font-size:19px !important;
+  font-weight:700 !important;
+  line-height:normal !important;
+}
+
+.department span{
+  font-size:15px !important;
+  font-weight:400 !important;
+  line-height:normal !important;
+}
+
+.search-box{
+  width:300px !important;
+  height:45px !important;
+  flex:0 0 300px !important;
+}
+
+/* Exact registration navigation geometry */
+.navbar{
+  height:60px !important;
+}
+
+.nav-inner{
+  min-height:60px !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:0 !important;
+}
+
+.nav-links{
+  display:flex !important;
+  flex:1 !important;
+  flex-wrap:wrap !important;
+  align-items:center !important;
+  gap:34px !important;
+}
+
+.nav-links a{
+  height:60px !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  color:#17163f !important;
+  font-size:16px !important;
+  font-weight:700 !important;
+  line-height:normal !important;
+}
+
+.nav-login{
+  margin-left:auto !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+}
+
+/* Registration page's main content width/left-right rhythm */
+.page-hero > .container{
+  max-width:1400px !important;
+  width:100% !important;
+  margin:auto !important;
+  padding-left:4% !important;
+  padding-right:4% !important;
+}
+
+.content > .container{
+  max-width:1400px !important;
+  width:100% !important;
+  margin:auto !important;
+  padding-left:4% !important;
+  padding-right:4% !important;
+}
+
+/* The login choice panel was explicitly narrower in the old portal.
+   Remove that old width restriction so its outer border follows the
+   same registration-page content extent. */
+.login-page .content > .container,
+.content > .container[style*="max-width:900px"]{
+  max-width:1400px !important;
+}
+
+/* Registration-sized page headings */
+.page-hero{
+  padding:28px 0 !important;
+}
+
+.page-hero h1{
+  font-size:31px !important;
+  font-weight:800 !important;
+  line-height:normal !important;
+}
+
+.breadcrumb{
+  font-size:14px !important;
+  font-weight:400 !important;
+}
+
+/* Keep the registration page's compact typography throughout. */
+body{
+  font-family:"Noto Sans Devanagari",Inter,sans-serif !important;
+  font-size:16px !important;
+  line-height:normal !important;
+}
+
+button,input,select,textarea{
+  font-family:"Noto Sans Devanagari",Inter,sans-serif !important;
+}
+
+/* Responsive behavior mirrors the registration header. */
+@media(max-width:950px){
+  .branding-inner{
+    flex-wrap:wrap !important;
+    gap:15px !important;
+  }
+  .brand-divider{
+    display:none !important;
+  }
+  .logo{
+    width:160px !important;
+    height:70px !important;
+  }
+  .tagline{
+    font-size:21px !important;
+  }
+  .department{
+    font-size:15px !important;
+  }
+  .search-box{
+    width:100% !important;
+    flex:1 1 100% !important;
+  }
+  .nav-links{
+    gap:16px !important;
+  }
+  .nav-links a{
+    font-size:14px !important;
+  }
+}
+
+@media(max-width:700px){
+  .branding-inner{
+    padding-top:15px !important;
+    padding-bottom:15px !important;
+  }
+  .logo{
+    width:145px !important;
+    height:70px !important;
+  }
+  .tagline{
+    font-size:18px !important;
+  }
+  .department{
+    font-size:13px !important;
+  }
+  .nav-links{
+    gap:0 !important;
+  }
+  .nav-links a{
+    height:auto !important;
+    padding:13px 9px !important;
+  }
+}
+

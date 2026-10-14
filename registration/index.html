@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Registration Form</h1>
+        <p class="subtitle">Create your account and get started!</p>
+
+        <form>
+
+            <h3>Personal Information</h3>
+
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter your full name" required>
+
+            <label>Email Address</label>
+            <input type="email" placeholder="Enter your email" required>
+
+            <label>Date of Birth</label>
+            <input type="date" required>
+
+            <label>Gender</label>
+            <select required>
+                <option value="">Select gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <h3>Account Details</h3>
+
+            <label>Username</label>
+            <input type="text" placeholder="Choose a username" required>
+
+            <label>Password</label>
+            <input type="password" placeholder="Create a password" required>
+
+            <label>Confirm Password</label>
+            <input type="password" placeholder="Confirm your password" required>
+
+            <div class="terms">
+                <input type="checkbox" required>
+                <span>I agree to the Terms and Conditions</span>
+            </div>
+
+            <button type="submit">Register Now →</button>
+
+            <p class="login">
+                Already have an account? <a href="#">Login</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
